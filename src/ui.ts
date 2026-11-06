@@ -12,6 +12,23 @@ export interface PrizeRecord {
   photo: string;
 }
 
+/** The async clipboard can be refused, so fall back to the older copy command. */
+async function copyText(text: string) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    const area = document.createElement('textarea');
+    area.value = text;
+    area.style.cssText = 'position:fixed;opacity:0';
+    document.body.append(area);
+    area.select();
+    const copied = document.execCommand('copy');
+    area.remove();
+    return copied;
+  }
+}
+
 function photoFile(p: PrizeRecord) {
   const bytes = Uint8Array.from(atob(p.photo.split(',')[1]), (c) => c.charCodeAt(0));
   return new File([bytes], `${p.name.toLowerCase()}-lucky-claw.jpg`, { type: 'image/jpeg' });
@@ -192,10 +209,8 @@ export class Ui {
     try {
       if (file && navigator.canShare?.({ files: [file] })) await navigator.share({ ...data, files: [file] });
       else if (navigator.share) await navigator.share(data);
-      else {
-        await navigator.clipboard.writeText(`${text} ${url}`);
-        this.toast('Link copied. Paste it anywhere to share.');
-      }
+      else if (await copyText(`${text} ${url}`)) this.toast('Link copied. Paste it anywhere to share.');
+      else this.toast(`Share this link: ${url}`, 6000);
     } catch (err) {
       // Closing the share sheet isn't a failure.
       if ((err as Error).name !== 'AbortError') this.toast(`Couldn't share. The link is ${url}`, 5000);
