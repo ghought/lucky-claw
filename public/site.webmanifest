@@ -1,0 +1,17 @@
+{
+  "name": "Lucky Claw",
+  "short_name": "Lucky Claw",
+  "description": "A realistic 3D arcade claw machine with real grip physics.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#05040b",
+  "theme_color": "#05040b",
+  "categories": ["games", "entertainment"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

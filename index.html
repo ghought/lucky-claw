@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <title>Lucky Claw · 3D Arcade Claw Machine</title>
+    <meta name="description" content="Can you beat the claw? A realistic 3D arcade claw machine with real grip physics. Free to play in your browser, on desktop or phone." />
+    <link rel="canonical" href="https://ghought.github.io/lucky-claw/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lucky Claw" />
+    <meta property="og:title" content="Lucky Claw · Can you beat the claw?" />
+    <meta property="og:description" content="A realistic 3D arcade claw machine with real grip physics. Free to play in your browser, on desktop or phone." />
+    <meta property="og:url" content="https://ghought.github.io/lucky-claw/" />
+    <meta property="og:image" content="https://ghought.github.io/lucky-claw/og-image.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="A red arcade claw machine full of plush toys, with the claw lifting a prize." />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Lucky Claw · Can you beat the claw?" />
+    <meta name="twitter:description" content="A realistic 3D arcade claw machine with real grip physics. Free to play in your browser, on desktop or phone." />
+    <meta name="twitter:image" content="https://ghought.github.io/lucky-claw/og-image.jpg" />
+    <meta name="twitter:image:alt" content="A red arcade claw machine full of plush toys, with the claw lifting a prize." />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#05040b" />
+    <meta name="application-name" content="Lucky Claw" />
+    <meta name="apple-mobile-web-app-title" content="Lucky Claw" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "Lucky Claw",
+        "url": "https://ghought.github.io/lucky-claw/",
+        "image": "https://ghought.github.io/lucky-claw/og-image.jpg",
+        "description": "A realistic 3D arcade claw machine with real grip physics.",
+        "genre": "Arcade",
+        "gamePlatform": "Web browser",
+        "applicationCategory": "Game",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id="scene" aria-label="A 3D claw machine"></canvas>
+    <noscript><p class="noscript">Lucky Claw needs JavaScript and WebGL to run.</p></noscript>
+
+    <div id="loading">
+      <div class="loading-title">LUCKY CLAW</div>
+      <div class="loading-note">Stocking the machine…</div>
+    </div>
+
+    <header id="hud">
+      <div class="readouts">
+        <div class="readout"><span class="label">Coins</span><span id="coins" class="value">0</span></div>
+        <div class="readout timer" id="timer-box" hidden><span class="label">Time</span><span id="timer" class="value">25</span></div>
+      </div>
+      <div class="tools">
+        <button id="prizes" class="tool" aria-label="Your prizes"><span id="prize-count">0</span> won</button>
+        <button id="view" class="tool" aria-label="Change camera view">Side view</button>
+        <button id="mute" class="tool" aria-label="Toggle sound">Sound on</button>
+        <button id="share" class="tool" aria-label="Share this game">Share</button>
+      </div>
+    </header>
+
+    <div id="toast" role="status"></div>
+
+    <div id="controls">
+      <div id="stick" aria-label="Joystick"><div id="stick-knob"></div></div>
+      <div id="hint">Arrow keys or WASD to move · Space to drop</div>
+      <button id="action">Insert coin</button>
+    </div>
+
+    <div id="win" hidden>
+      <div class="win-card">
+        <div class="win-kicker">You won!</div>
+        <img id="win-photo" alt="" />
+        <div id="win-name"></div>
+        <div class="win-actions">
+          <button id="win-share">Share</button>
+          <button id="win-ok">Keep playing</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="shelf" hidden>
+      <div class="shelf-card">
+        <div class="shelf-head"><span>Your prizes</span><button id="shelf-close" aria-label="Close">Close</button></div>
+        <div id="shelf-grid"></div>
+        <p id="shelf-empty">Nothing yet. Go get one!</p>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
